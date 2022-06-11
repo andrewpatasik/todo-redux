@@ -792,6 +792,9 @@ select {
 .mb-12 {
   margin-bottom: 3rem;
 }
+.ml-auto {
+  margin-left: auto;
+}
 .flex {
   display: flex;
 }
@@ -834,6 +837,12 @@ select {
 .gap-2 {
   gap: 0.5rem;
 }
+.self-end {
+  align-self: flex-end;
+}
+.justify-self-end {
+  justify-self: end;
+}
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -872,6 +881,9 @@ select {
 }
 .text-center {
   text-align: center;
+}
+.text-right {
+  text-align: right;
 }
 .text-2xl {
   font-size: 1.5rem;
