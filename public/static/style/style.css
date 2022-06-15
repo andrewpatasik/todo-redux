@@ -781,10 +781,6 @@ select {
   top: -12rem;
   bottom: -12rem;
 }
-.my-12 {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
 .my-8 {
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -816,8 +812,14 @@ select {
 .w-full {
   width: 100%;
 }
-.w-3\/4 {
-  width: 75%;
+.w-4\/5 {
+  width: 80%;
+}
+.w-11\/12 {
+  width: 91.666667%;
+}
+.w-5\/6 {
+  width: 83.333333%;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -837,11 +839,18 @@ select {
 .gap-2 {
   gap: 0.5rem;
 }
-.self-end {
-  align-self: flex-end;
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
 }
-.justify-self-end {
-  justify-self: end;
+.divide-zinc-100 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(244 244 245 / var(--tw-divide-opacity));
+}
+.divide-black > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-divide-opacity));
 }
 .rounded-lg {
   border-radius: 0.5rem;
@@ -881,9 +890,6 @@ select {
 }
 .text-center {
   text-align: center;
-}
-.text-right {
-  text-align: right;
 }
 .text-2xl {
   font-size: 1.5rem;

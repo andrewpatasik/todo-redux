@@ -15,7 +15,7 @@ const TaskList = ({ taskCollection }) => {
 
   return (
     <section className="my-8">
-      <ul>{renderTodoTask()}</ul>
+      <ul className="bg-slate-700 divide-y divide-black rounded-lg">{renderTodoTask()}</ul>
     </section>
   );
 };
