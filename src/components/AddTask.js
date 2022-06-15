@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { addTask } from "../actions";
+import { generateTaskId } from "../helper";
 import useTodoValue from "../hooks/useTodoValue";
 
 const AddTask = ({ addTask }) => {
@@ -13,6 +14,7 @@ const AddTask = ({ addTask }) => {
     event.preventDefault();
 
     const payload = {
+      taskId: generateTaskId("task"),
       checked: todoCheck,
       content: todoTask,
     };

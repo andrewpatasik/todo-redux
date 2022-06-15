@@ -2,8 +2,10 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import useTodoValue from "../hooks/useTodoValue";
+import { connect } from "react-redux";
+import { deleteTask } from "../actions";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, deleteTask }) => {
   const [todoCheck, handleInputChange] = useTodoValue(task.checked);
 
   return (
@@ -18,7 +20,10 @@ const TaskCard = ({ task }) => {
         <p className={task.checked ? "line-through" : null}>{task.content}</p>
         <button
           className="ml-auto"
-          onChange={() => console.log("should clear task")}
+          onClick={(e) => {
+            e.preventDefault();
+            deleteTask(task);
+          }}
         >
           <FontAwesomeIcon icon={faClose} />
         </button>
@@ -27,4 +32,4 @@ const TaskCard = ({ task }) => {
   );
 };
 
-export default TaskCard;
+export default connect(null, { deleteTask })(TaskCard);
