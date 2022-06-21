@@ -1,6 +1,7 @@
-export const allTask = () => {
+export const sortTask = (collection) => {
   return {
-    type: "ALL_TASKS"
+    type: "SORT_TASK",
+    payload: collection
   }
 }
 

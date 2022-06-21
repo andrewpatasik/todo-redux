@@ -1,21 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import TaskCard from "./TaskCard";
 
 const TaskList = ({ taskCollection }) => {
-  const renderTodoTask = () => {
-    if (taskCollection.length < 1) {
-      return <h1>No Task Created.</h1>;
-    }
+  const [currentIndex, setCurrentIndex] = useState(null);
 
+  const renderTodoTask = () => {
     return taskCollection.map((task, index) => {
-      return <TaskCard key={index} task={task}  />
+      return <TaskCard key={index} task={task} todoIndex={index} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />;
     });
   };
 
   return (
     <section className="my-8">
-      <ul className="bg-slate-700 divide-y divide-black rounded-lg">{renderTodoTask()}</ul>
+      <ul
+        id="todo-list"
+        className="bg-slate-700 divide-y divide-black rounded-lg"
+      >
+        {renderTodoTask()}
+      </ul>
     </section>
   );
 };

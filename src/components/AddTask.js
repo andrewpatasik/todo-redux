@@ -15,9 +15,12 @@ const AddTask = ({ addTask }) => {
 
     const payload = {
       taskId: generateTaskId("task"),
+      taskCreatedAt: new Date(),
       checked: todoCheck,
       content: todoTask,
     };
+
+    console.log(payload)
 
     addTask(payload);
 
