@@ -1,8 +1,8 @@
-export const sortTask = (collection) => {
+export const sortTask = (targetId, currentId) => {
   return {
     type: "SORT_TASK",
-    payload: collection
-  }
+    payload: { targetId, currentId },
+  };
 }
 
 export const addTask = (task) => {

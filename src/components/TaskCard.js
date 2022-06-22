@@ -4,64 +4,36 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import useTodoValue from "../hooks/useTodoValue";
 import { connect } from "react-redux";
 import { sortTask, deleteTask, editTask } from "../actions";
+import {
+  handleDragStart,
+  handleDragEnter,
+  handleDragLeave,
+  handleDragOver,
+  handleDrop,
+} from "../helper";
 
 const TaskCard = ({
   todoIndex,
   task,
-  taskCollection,
   currentIndex,
   setCurrentIndex,
   sortTask,
   deleteTask,
-  editTask
+  editTask,
 }) => {
   const [todoCheck, handleInputChange] = useTodoValue(task.checked);
   const checkBoxRef = useRef(todoCheck);
-
-  const handleDragStart = (e) => {
-    const item = e.target;
-    const itemIndex = item.parentNode.dataset.index;
-
-    setCurrentIndex(itemIndex);
-  };
-
-  const handleDragEnter = (e) => {
-    const item = e.target;
-    item.classList.add("bg-gray-600");
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDragLeave = (e) => {
-    const item = e.target;
-    item.classList.remove("bg-gray-600");
-  };
-
-  const handleDrop = (e) => {
-    const item = e.target;
-    const targetIndex = item.parentNode.parentNode.dataset.index;
-    item.classList.remove("bg-gray-600");
-
-    const collection = [...taskCollection];
-    const copyOfFirstItem = collection[currentIndex];
-    collection[currentIndex] = collection[targetIndex];
-    collection[targetIndex] = copyOfFirstItem;
-
-    sortTask(collection);
-  };
 
   return (
     <li data-index={todoIndex}>
       <div
         className="todo-item hover:cursor-grab active:cursor-grabbing"
         draggable="true"
-        onDragStart={handleDragStart}
-        onDragEnter={handleDragEnter}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
+        onDragStart={(e) => handleDragStart(setCurrentIndex, e)}
+        onDragEnter={(e) => handleDragEnter(e)}
+        onDragOver={(e) => handleDragOver(e)}
+        onDragLeave={(e) => handleDragLeave(e)}
+        onDrop={(e) => handleDrop(sortTask, currentIndex, e)}
       >
         <form className="p-4 flex items-center gap-2 text-white">
           <input
@@ -73,10 +45,10 @@ const TaskCard = ({
             type="checkbox"
             className="form-checkbox rounded-full h-6 w-6 text-indigo-600"
             checked={task.checked}
-            onChange={e => {
-              handleInputChange(e)
-              const payload = {...task, checked: checkBoxRef.current.checked}
-              editTask(payload)
+            onChange={(e) => {
+              handleInputChange(e);
+              const payload = { ...task, checked: checkBoxRef.current.checked };
+              editTask(payload);
             }}
           />
           <p
@@ -107,10 +79,4 @@ const TaskCard = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    taskCollection: state.taskCollection,
-  };
-};
-
-export default connect(mapStateToProps, { sortTask, deleteTask, editTask })(TaskCard);
+export default connect(null, { sortTask, deleteTask, editTask })(TaskCard);

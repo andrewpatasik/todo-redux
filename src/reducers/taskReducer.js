@@ -45,7 +45,13 @@ const taskReducer = (
     return newCollection;
   }
   if (action.type == "SORT_TASK") {
-    return action.payload;
+    const { targetId, currentId } = action.payload;
+    const newCollection = [...taskCollection];
+    const firstItemRef = newCollection[currentId];
+    newCollection[currentId] = newCollection[targetId];
+    newCollection[targetId] = firstItemRef;
+
+    return newCollection;
   }
 
   return taskCollection;
