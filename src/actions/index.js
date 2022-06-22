@@ -18,3 +18,10 @@ export const deleteTask = (task) => {
     payload: task
   }
 }
+
+export const editTask = (task) => {
+  return {
+    type: "EDIT_TASK",
+    payload: task
+  }
+}

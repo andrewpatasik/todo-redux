@@ -4,10 +4,9 @@ import { useState } from "react";
 const useTodoValue = (value) => {
   const [todoValue, setTodoValue] = useState(value);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = async (event) => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
-
     setTodoValue(value)
   };
 

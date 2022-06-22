@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import useTodoValue from "../hooks/useTodoValue";
 import { connect } from "react-redux";
-import { sortTask, deleteTask } from "../actions";
+import { sortTask, deleteTask, editTask } from "../actions";
 
 const TaskCard = ({
   todoIndex,
@@ -13,8 +13,10 @@ const TaskCard = ({
   setCurrentIndex,
   sortTask,
   deleteTask,
+  editTask
 }) => {
   const [todoCheck, handleInputChange] = useTodoValue(task.checked);
+  const checkBoxRef = useRef(todoCheck);
 
   const handleDragStart = (e) => {
     const item = e.target;
@@ -63,14 +65,19 @@ const TaskCard = ({
       >
         <form className="p-4 flex items-center gap-2 text-white">
           <input
+            ref={checkBoxRef}
             draggable="true"
-            onDragOver={e => {
+            onDragOver={(e) => {
               e.stopPropagation();
             }}
             type="checkbox"
             className="form-checkbox rounded-full h-6 w-6 text-indigo-600"
-            checked={todoCheck}
-            onChange={handleInputChange}
+            checked={task.checked}
+            onChange={e => {
+              handleInputChange(e)
+              const payload = {...task, checked: checkBoxRef.current.checked}
+              editTask(payload)
+            }}
           />
           <p
             draggable="true"
@@ -106,4 +113,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { sortTask, deleteTask })(TaskCard);
+export default connect(mapStateToProps, { sortTask, deleteTask, editTask })(TaskCard);
