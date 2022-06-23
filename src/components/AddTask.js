@@ -20,8 +20,6 @@ const AddTask = ({ addTask }) => {
       content: todoTask,
     };
 
-    console.log(payload)
-
     addTask(payload);
 
     const inputField = document.getElementById('input-task');

@@ -7,7 +7,15 @@ const TaskList = ({ taskCollection }) => {
 
   const renderTodoTask = () => {
     return taskCollection.map((task, index) => {
-      return <TaskCard key={index} task={task} todoIndex={index} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />;
+      return (
+        <TaskCard
+          key={index}
+          task={task}
+          todoIndex={index}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+        />
+      );
     });
   };
 

@@ -1,25 +1,7 @@
 /* eslint-disable eqeqeq */
+
 const taskReducer = (
-  taskCollection = [
-    {
-      taskId: "task-1bdfdfa6-1871-402c-8cff-8cbc510d488b",
-      taskCreatedAt: "2022-06-21T05:41:21.230Z",
-      checked: true,
-      content: "start coding",
-    },
-    {
-      taskId: "task-ccfd03aa-9b84-459a-b460-8f736116d67f",
-      taskCreatedAt: "2022-06-21T05:41:25.928Z",
-      checked: false,
-      content: "feed my pet",
-    },
-    {
-      taskId: "task-1f70f0cf-faa9-42d0-853b-0cf8659376bc",
-      taskCreatedAt: "2022-06-21T05:41:34.048Z",
-      checked: false,
-      content: "buy groceries",
-    },
-  ],
+  taskCollection = [],
   action
 ) => {
   if (action.type == "ADD_TASK") {
@@ -34,13 +16,13 @@ const taskReducer = (
     return newCollection;
   }
   if (action.type == "EDIT_TASK") {
-    const newItem = action.payload
-    const newCollection = [...taskCollection]
-    const itemIndex = newCollection.findIndex(item => {
-      return item.taskCreatedAt === newItem.taskCreatedAt
-    })
+    const newItem = action.payload;
+    const newCollection = [...taskCollection];
+    const itemIndex = newCollection.findIndex((item) => {
+      return item.taskCreatedAt === newItem.taskCreatedAt;
+    });
 
-    newCollection[itemIndex] = newItem
+    newCollection[itemIndex] = newItem;
 
     return newCollection;
   }

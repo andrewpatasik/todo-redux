@@ -9,10 +9,21 @@ import App from "./App";
 const container = document.getElementById('root');
 const root = createRoot(container);
 
-const store = createStore(reducers);
+var storage = window.localStorage;
+const KEY = "taskCollection";
+
+const storageCollection = JSON.parse(storage.getItem(KEY)) || {}
+
+const store = createStore(reducers, storageCollection);
+
+store.subscribe(() => {
+  const taskCollection = JSON.stringify(store.getState());
+
+  storage.setItem(KEY, taskCollection)
+})
 
 root.render(
   <Provider store={store}>
     <App />
   </Provider>
-)
+);

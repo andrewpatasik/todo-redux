@@ -47,8 +47,8 @@ const TaskCard = ({
             checked={task.checked}
             onChange={(e) => {
               handleInputChange(e);
-              const payload = { ...task, checked: checkBoxRef.current.checked };
-              editTask(payload);
+              const taskPayload = { ...task, checked: checkBoxRef.current.checked };
+              editTask(taskPayload);
             }}
           />
           <p
