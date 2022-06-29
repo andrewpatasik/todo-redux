@@ -1,13 +1,34 @@
+/* eslint-disable eqeqeq */
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import ClearButton from "./ClearButton";
+import FilterButton from "./FilterButton,";
 import TaskCard from "./TaskCard";
 
 const TaskList = ({ taskCollection }) => {
   const [currentIndex, setCurrentIndex] = useState(null);
+  const [filterIndex, setFilterIndex] = useState(0);
+
+  // set a function that process the filter
+  const filterCollection = (collection) => {
+    switch (filterIndex) {
+      case 1:
+        // active tasks
+        return collection.filter((task) => task.checked == false);
+      case 2:
+        // completed tasks
+        return collection.filter((task) => task.checked == true);
+      default:
+        // all tasks
+        return collection;
+    }
+  };
 
   const renderTodoTask = () => {
-    return taskCollection.map((task, index) => {
+    // set a container for taskCollection that display filtered collection or all collection
+    let tasks = filterCollection(taskCollection);
+
+    return tasks.map((task, index) => {
       return (
         <TaskCard
           key={index}
@@ -29,12 +50,7 @@ const TaskList = ({ taskCollection }) => {
         {renderTodoTask()}
         <section className="flex justify-between items-center text-xs font-bold text-slate-500 p-4">
           <p>{taskCollection.length} items left</p>
-          <article className="flex justify-evenly gap-2">
-            {/* this is filter */}
-            <div>All</div>
-            <div>Active</div>
-            <div>Completed</div>
-          </article>
+          <FilterButton setFilterIndex={setFilterIndex} />
           <ClearButton />
         </section>
       </ul>

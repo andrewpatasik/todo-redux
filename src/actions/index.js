@@ -19,9 +19,9 @@ export const deleteTask = (task) => {
   }
 }
 
-export const deleteAllTask = () => {
+export const deleteCompletedTask = () => {
   return {
-    type: "DELETE_ALL"
+    type: "DELETE_COMPLETED"
   }
 }
 

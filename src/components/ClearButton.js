@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
-import { deleteAllTask } from "../actions/index";
+import { deleteCompletedTask } from "../actions/index";
 
-const ClearButton = ({ deleteAllTask }) => {
+const ClearButton = ({ deleteCompletedTask }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    deleteAllTask();
+    deleteCompletedTask();
   }
 
   return (
@@ -14,4 +14,4 @@ const ClearButton = ({ deleteAllTask }) => {
   );
 };
 
-export default connect(null, { deleteAllTask })(ClearButton);
+export default connect(null, { deleteCompletedTask })(ClearButton);

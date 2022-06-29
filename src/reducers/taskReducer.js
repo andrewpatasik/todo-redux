@@ -15,8 +15,12 @@ const taskReducer = (
 
     return newCollection;
   }
-  if (action.type == "DELETE_ALL") {
-    return [];
+  if (action.type == "DELETE_COMPLETED") {
+    const newCollection = [...taskCollection].filter(
+      (task) => task.checked == false
+    );
+
+    return newCollection;
   }
   if (action.type == "EDIT_TASK") {
     const newItem = action.payload;
