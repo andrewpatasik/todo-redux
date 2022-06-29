@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import ClearButton from "./ClearButton";
 import TaskCard from "./TaskCard";
 
 const TaskList = ({ taskCollection }) => {
@@ -34,7 +35,7 @@ const TaskList = ({ taskCollection }) => {
             <div>Active</div>
             <div>Completed</div>
           </article>
-          <button>Clear completed</button>
+          <ClearButton />
         </section>
       </ul>
     </section>

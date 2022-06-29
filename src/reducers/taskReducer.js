@@ -15,6 +15,9 @@ const taskReducer = (
 
     return newCollection;
   }
+  if (action.type == "DELETE_ALL") {
+    return [];
+  }
   if (action.type == "EDIT_TASK") {
     const newItem = action.payload;
     const newCollection = [...taskCollection];

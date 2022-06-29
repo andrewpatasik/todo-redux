@@ -19,6 +19,12 @@ export const deleteTask = (task) => {
   }
 }
 
+export const deleteAllTask = () => {
+  return {
+    type: "DELETE_ALL"
+  }
+}
+
 export const editTask = (task) => {
   return {
     type: "EDIT_TASK",
