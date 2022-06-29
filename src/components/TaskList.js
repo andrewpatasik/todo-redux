@@ -50,7 +50,7 @@ const TaskList = ({ taskCollection }) => {
         {renderTodoTask()}
         <section className="flex justify-between items-center text-xs font-bold text-slate-500 p-4">
           <p>{taskCollection.length} items left</p>
-          <FilterButton setFilterIndex={setFilterIndex} />
+          <FilterButton filterIndex={filterIndex} setFilterIndex={setFilterIndex} />
           <ClearButton />
         </section>
       </ul>
