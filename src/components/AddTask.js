@@ -46,7 +46,7 @@ const AddTask = ({ addTask }) => {
         className="form-input w-full h-12 bg-slate-900 border-0 focus:ring-0"
         name="todo-task"
         value={todoTask}
-        placeholder="Add new task..."
+        placeholder="Create a new Todo..."
         onChange={handleTodoTask}
       />
     </form>

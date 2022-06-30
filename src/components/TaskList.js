@@ -1,6 +1,7 @@
 /* eslint-disable eqeqeq */
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import useWindowSize from "../hooks/useWindowSize";
 import ClearButton from "./ClearButton";
 import FilterButton from "./FilterButton,";
 import TaskCard from "./TaskCard";
@@ -8,6 +9,7 @@ import TaskCard from "./TaskCard";
 const TaskList = ({ taskCollection }) => {
   const [currentIndex, setCurrentIndex] = useState(null);
   const [filterIndex, setFilterIndex] = useState(0);
+  const [width] = useWindowSize();
 
   // set a function that process the filter
   const filterCollection = (collection) => {
@@ -22,6 +24,10 @@ const TaskList = ({ taskCollection }) => {
         // all tasks
         return collection;
     }
+  };
+
+  const countTaskLeft = (collection) => {
+    return collection.filter((task) => task.checked == false).length;
   };
 
   const renderTodoTask = () => {
@@ -42,18 +48,42 @@ const TaskList = ({ taskCollection }) => {
   };
 
   return (
-    <section className="mt-8 max-h-96">
+    <section className="relative mt-8 ">
       <ul
         id="todo-list"
         className="bg-slate-700 divide-y divide-black rounded-lg"
       >
         {renderTodoTask()}
-        <section className="flex justify-between items-center text-xs font-bold text-slate-500 p-4">
-          <p>{taskCollection.length} items left</p>
-          <FilterButton filterIndex={filterIndex} setFilterIndex={setFilterIndex} />
+        <section
+          id="widget"
+          className="flex justify-between items-center text-xs font-bold text-slate-500 p-4"
+        >
+          <p>{`${countTaskLeft(taskCollection)} items left`}</p>
+          {/* should render if screen is > 961 */}
+          {width >= 961 ? (
+            <FilterButton
+              filterIndex={filterIndex}
+              setFilterIndex={setFilterIndex}
+            />
+          ) : (
+            ""
+          )}
           <ClearButton />
         </section>
       </ul>
+      {/* should render if screen is > 320 and < 961 */}
+      {width >= 320 && width <= 961 ? (
+        <div className="absolute w-full inset-x-0 -bottom-20 bg-slate-700 divide-y divide-black rounded-lg">
+          <section className="flex justify-center items-center text-md font-bold text-slate-500 p-4">
+            <FilterButton
+              filterIndex={filterIndex}
+              setFilterIndex={setFilterIndex}
+            />
+          </section>
+        </div>
+      ) : (
+        ""
+      )}
     </section>
   );
 };

@@ -42,8 +42,9 @@ const TaskCard = ({
             onDragOver={(e) => {
               e.stopPropagation();
             }}
+            onDragStart={(e) => e.preventDefault()}
             type="checkbox"
-            className="form-checkbox rounded-full h-6 w-6 text-indigo-600"
+            className="form-checkbox rounded-full h-6 w-6 text-indigo-600 cursor-pointer"
             checked={task.checked}
             onChange={(e) => {
               handleInputChange(e);
@@ -56,7 +57,8 @@ const TaskCard = ({
             onDragOver={(e) => {
               e.stopPropagation();
             }}
-            className={task.checked ? "line-through" : null}
+            onDragStart={(e) => e.preventDefault()}
+            className={task.checked ? "line-through text-slate-500" : "text-gray-300"}
           >
             {task.content}
           </p>
@@ -70,6 +72,7 @@ const TaskCard = ({
               e.preventDefault();
               deleteTask(task);
             }}
+            onDragStart={(e) => e.preventDefault()}
           >
             <FontAwesomeIcon icon={faClose} />
           </button>
